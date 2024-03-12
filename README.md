@@ -142,10 +142,10 @@ $ yarn dev
 
 - JavaScript
 - React
-- Next.js 12
+- Next.js 14
 - recoil
 - react-query
-- emotion/styled
+- styled-components
 - react-hook-form
 - yup
 
