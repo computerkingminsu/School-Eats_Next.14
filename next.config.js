@@ -17,13 +17,12 @@ const nextConfig = {
     // styledComponents 설정 추가
     styledComponents: true,
   },
-  webpack(config, options) {
+  webpack(config) {
     // SVG 파일을 컴포넌트로 가져오기 위한 설정
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
-
     return config;
   },
   images: {

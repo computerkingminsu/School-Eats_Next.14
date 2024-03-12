@@ -4,7 +4,7 @@ import RecoilRootProvider from '@/lib/recoilRootProvide';
 import ReactQueryProvider from '@/lib/reactQuery';
 import type { Metadata } from 'next';
 import Script from 'next/script';
-
+import Layout from '@/layout/page';
 import ScriptLoader from '@/lib/Script';
 
 export const metadata: Metadata = {
@@ -31,8 +31,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <StyledComponentsRegistry>
           <GlobalStyle />
+
           <RecoilRootProvider>
-            <ReactQueryProvider>{children}</ReactQueryProvider>
+            <Layout>
+              <ReactQueryProvider>{children}</ReactQueryProvider>
+            </Layout>
           </RecoilRootProvider>
         </StyledComponentsRegistry>
         <Script
