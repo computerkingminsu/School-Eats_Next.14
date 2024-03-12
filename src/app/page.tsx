@@ -1,7 +1,17 @@
-export default function Page() {
+import Banner from '@/components/unit/home/banner/Banner';
+import CommunityCard from '@/components/unit/home/communitycard/CommunityCard';
+import FoodQuration from '@/components/unit/home/foodquration/FoodQuration';
+import MapButton from '@/components/unit/home/mapbutton/MapButton';
+import YoutubeBanner from '@/components/unit/home/youtubebanner/YoutubeBanner';
+
+export default function HomePage() {
   return (
-    <div className="space-y-4">
-      <h1 className="text-xl font-medium text-gray-400/80">Styled with Styled Componentsaa안녕</h1>
-    </div>
+    <>
+      <Banner />
+      <YoutubeBanner />
+      <FoodQuration />
+      <MapButton />
+      <CommunityCard />
+    </>
   );
 }

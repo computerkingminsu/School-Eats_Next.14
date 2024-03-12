@@ -4,8 +4,8 @@ import RecoilRootProvider from '@/lib/recoilRootProvide';
 import ReactQueryProvider from '@/lib/reactQuery';
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import Layout from '@/layout/page';
 import ScriptLoader from '@/lib/Script';
+import Layout from '@/components/unit/layout/page';
 
 export const metadata: Metadata = {
   title: 'School Eats!',
