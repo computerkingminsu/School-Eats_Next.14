@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 // import ChinesePlace from '@/components/unit/place/ChinesePlace/ChinesePlace.index';
 
