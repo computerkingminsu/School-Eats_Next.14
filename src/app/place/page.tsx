@@ -1,6 +1,19 @@
 'use client';
-import Place from '@/components/unit/place/Place.index';
+
+import React, { Suspense } from 'react';
+import dynamic from 'next/dynamic';
+// import Place from '@/components/unit/place/Place.index';
+
+const Place = dynamic(() => import('../../components/unit/place/Place.index'), {
+  suspense: true,
+});
 
 export default function place() {
-  return <Place />;
+  return (
+    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Place />
+      </Suspense>
+    </div>
+  );
 }
