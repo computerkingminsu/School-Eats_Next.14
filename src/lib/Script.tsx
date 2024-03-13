@@ -1,4 +1,3 @@
-// components/KakaoScriptLoader.tsx
 'use client';
 
 import Script from 'next/script';
@@ -32,7 +31,7 @@ export const storage = getStorage(firebaseapp);
 
 export default function ScriptLoader() {
   const kakaoInit = () => {
-    // 페이지가 로드되면 실행
+    //페이지가 로드되면 실행
     window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_KEY);
   };
 
@@ -47,12 +46,12 @@ export default function ScriptLoader() {
           localStorage.removeItem('sessionExpiry');
           localStorage.removeItem('recoil-persist');
           window.location.href = '/';
-          // 필요한 로그아웃 처리
+          //필요한 로그아웃 처리
         }
       }
-    }, 1000); // 매 1초마다 실행
+    }, 1000); //매 1초마다 실행
 
-    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정지
+    return () => clearInterval(interval); //컴포넌트 언마운트 시 인터벌 정지
   }, []);
 
   return (

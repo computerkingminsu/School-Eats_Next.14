@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import * as S from './PlaceDetail.styles';
-import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useComments } from '../../../../hooks/useComments';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
@@ -35,19 +35,18 @@ export default function PlaceDetail(): JSX.Element {
   } = useComments();
   const { handleBookmark, isBookmarked } = useBookmark();
   const router = useRouter();
-  // const data = JSON.stringify(router.query);
-  // const jsonObject = JSON.parse(data);
-  // const postId = jsonObject.placeid;
+  //const data = JSON.stringify(router.query);
+  //const jsonObject = JSON.parse(data);
+  //const postId = jsonObject.placeid;
 
   const params = useParams();
   const placeId = params.placeid;
-  //@ts-ignore
+  //@ts-expect-error
   const postId = decodeURIComponent(placeId);
 
-  console.log(postId); // 솔티드머랭
+  console.log(postId); //솔티드머랭
   const login = useRecoilValue(isLoggedIn);
   const email = useRecoilValue(userEmail);
-  //@ts-ignore
   const { data: post } = useGetDetailPost(postId);
 
   const goBack = () => {
@@ -55,7 +54,7 @@ export default function PlaceDetail(): JSX.Element {
   };
 
   const handleRatingChange = (value: number) => {
-    setNewRating(value); // 사용자가 선택한 별점을 상태에 저장
+    setNewRating(value); //사용자가 선택한 별점을 상태에 저장
   };
 
   const goBookmark = () => {
@@ -85,7 +84,7 @@ export default function PlaceDetail(): JSX.Element {
   };
 
   const handleEditingRatingChange = (value: number) => {
-    setEditingCommentRating(value); // 사용자가 선택한 별점을 상태에 저장
+    setEditingCommentRating(value); //사용자가 선택한 별점을 상태에 저장
   };
 
   const submitEditedComment = async () => {
@@ -173,7 +172,7 @@ export default function PlaceDetail(): JSX.Element {
 
           {Array.isArray(post?.menu) &&
             post?.menu.map((m: string) => (
-              <S.Infor key={m}>{m}</S.Infor> // 'key' 속성 추가
+              <S.Infor key={m}>{m}</S.Infor> //'key' 속성 추가
             ))}
         </S.InforWrapper>
         <S.Divine />

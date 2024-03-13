@@ -82,7 +82,7 @@ export const BookmarkWrapper = styled.div`
   margin: 3% 3%;
   cursor: pointer;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.03); // slightly darken on hover
+    background-color: rgba(0, 0, 0, 0.03);
   }
 `;
 

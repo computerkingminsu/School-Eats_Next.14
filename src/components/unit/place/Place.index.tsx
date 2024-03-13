@@ -24,15 +24,15 @@ type OrdKey = 'rate' | 'commentscount';
 export default function Place(): JSX.Element {
   const router = useRouter();
   const pathname = usePathname();
-  // const [searchParams, setSearchParams]: any = useSearchParams();
+  //const [searchParams, setSearchParams]: any = useSearchParams();
   const searchParams = useSearchParams();
-  // const [order, setOrder] = useState<OrdKey>((router.query.sort as OrdKey) || 'commentscount');
+  //const [order, setOrder] = useState<OrdKey>((router.query.sort as OrdKey) || 'commentscount');
   const [order, setOrder] = useState<OrdKey>((searchParams.get('sort') as OrdKey) || 'commentscount');
   const { posts, loading } = useGetPosts('all', order);
 
   const handleChange = (value: OrdKey) => {
     setOrder(value);
-    // 선택한 정렬 기준을 URL 쿼리 파라미터로 추가합니다.
+    //선택한 정렬 기준을 URL 쿼리 파라미터로 추가합니다.
     router.push(`${pathname}?sort=${value}`);
     // setSearchParams({ sort: value });
   };
@@ -86,7 +86,7 @@ export default function Place(): JSX.Element {
       </S.SelectDiv>
       <S.ContentsWrapper>
         {loading && posts.length === 0 ? (
-          // 로딩 중일 때 스켈레톤 표시
+          //로딩 중일 때 스켈레톤 표시
           <SkeletonPlace />
         ) : (
           posts.map((post: Post) => (
@@ -98,7 +98,7 @@ export default function Place(): JSX.Element {
                       post.img ||
                       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=='
                     }
-                    //@ts-ignore
+                    //@ts-expect-error
                     alt={post.title}
                     // width={230}
                     // height={240}
@@ -115,7 +115,7 @@ export default function Place(): JSX.Element {
                         '/rate.png' ||
                         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=='
                       }
-                      //@ts-ignore
+                      //@ts-expect-error
                       alt={post.title}
                       width={11}
                       height={11}

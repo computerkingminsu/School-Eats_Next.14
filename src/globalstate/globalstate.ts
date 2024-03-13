@@ -1,5 +1,5 @@
-import { AtomEffect, atom, useSetRecoilState } from 'recoil';
-import { recoilPersist } from 'recoil-persist'; // ✔
+import { atom, useSetRecoilState } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
 
 const ssrCompletedState = atom({
   key: 'SsrCompleted',
@@ -8,11 +8,13 @@ const ssrCompletedState = atom({
 
 export const useSsrComplectedState = () => {
   const setSsrCompleted = useSetRecoilState(ssrCompletedState);
-  return () => setSsrCompleted(true);
+  return () => {
+    setSsrCompleted(true);
+  };
 };
 const { persistAtom } = recoilPersist();
 
-export const persistAtomEffect = <T>(param: Parameters<AtomEffect<T>>[0]) => {
+export const persistAtomEffect = (param: any) => {
   param.getPromise(ssrCompletedState).then(() => persistAtom(param));
 };
 

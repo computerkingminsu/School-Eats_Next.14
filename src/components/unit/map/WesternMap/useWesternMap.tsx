@@ -6,17 +6,15 @@ export default function useWesternMap(): JSX.Element {
   const router = useRouter();
   useEffect(() => {
     // 맵 만들기 ===================================
-    //@ts-ignore
+    //@ts-expect-error
     if (window.kakao && window.kakao.maps) {
-      //@ts-ignore
       kakao.maps.load(() => {
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        var mapContainer = document.getElementById('map'), //지도를 표시할 div
           mapOption = {
-            //@ts-ignore
-            center: new kakao.maps.LatLng(35.14637162707166, 126.92806609511922), // 지도의 중심좌표
-            level: 4, // 지도의 확대 레벨
+            center: new kakao.maps.LatLng(35.14637162707166, 126.92806609511922), //지도의 중심좌표
+            level: 4, //지도의 확대 레벨
           };
-        //@ts-ignore
+
         var map = new kakao.maps.Map(mapContainer, mapOption);
 
         const locations = [
@@ -25,40 +23,37 @@ export default function useWesternMap(): JSX.Element {
           {
             name: '피렌체',
             imageSrc: '/logo.png',
-            //@ts-ignore
+
             position: new kakao.maps.LatLng(35.145592898249774, 126.92968267121469),
             route: '/place/피렌체',
           },
           {
             name: '헝그리브라더스',
             imageSrc: '/logo.png',
-            //@ts-ignore
+
             position: new kakao.maps.LatLng(35.14606589092191, 126.9293009228942),
             route: '/place/헝그리브라더스',
           },
           {
             name: '프랭크버거',
             imageSrc: '/logo.png',
-            //@ts-ignore
+
             position: new kakao.maps.LatLng(35.14575312478092, 126.93008856450622),
             route: '/place/프랭크버거',
           },
           {
             name: '노브랜드버거',
             imageSrc: '/logo.png',
-            //@ts-ignore
+
             position: new kakao.maps.LatLng(35.145176528117496, 126.93056641511407),
             route: '/place/노브랜드버거',
           },
         ];
         locations.map((location, index) => {
-          //@ts-ignore
           const markerImage = new kakao.maps.MarkerImage(location.imageSrc, new kakao.maps.Size(30, 30), {
-            //@ts-ignore
             offset: new kakao.maps.Point(14, 0),
           });
 
-          //@ts-ignore
           const marker = new kakao.maps.Marker({
             position: location.position,
             image: markerImage,
@@ -74,7 +69,7 @@ export default function useWesternMap(): JSX.Element {
             '</div>';
 
           const position = location.position;
-          //@ts-ignore
+
           const customOverlay = new kakao.maps.CustomOverlay({
             map: map,
             position: position,
@@ -89,7 +84,7 @@ export default function useWesternMap(): JSX.Element {
             });
           }
           kakao.maps.event.addListener(marker, 'click', function () {
-            // HTML 콘텐츠를 생성하고 스타일을 적용합니다
+            //HTML 콘텐츠를 생성하고 스타일을 적용합니다
             router.push(location.route);
           });
         });

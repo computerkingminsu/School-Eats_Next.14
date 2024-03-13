@@ -6,26 +6,22 @@ import { useRouter } from 'next/navigation';
 export default function useChineseMap(): JSX.Element {
   const router = useRouter();
   useEffect(() => {
-    // 맵 만들기 ===================================
-    //@ts-ignore
+    //@ts-expect-error
     if (window.kakao && window.kakao.maps) {
-      //@ts-ignore
       kakao.maps.load(() => {
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        var mapContainer = document.getElementById('map'),
           mapOption = {
-            //@ts-ignore
-            center: new kakao.maps.LatLng(35.14637162707166, 126.92806609511922), // 지도의 중심좌표
-            level: 4, // 지도의 확대 레벨
+            center: new kakao.maps.LatLng(35.14637162707166, 126.92806609511922),
+            level: 4,
           };
-        //@ts-ignore
+
         var map = new kakao.maps.Map(mapContainer, mapOption);
 
         const locations = [
-          //중식
           {
             name: '백두산',
             imageSrc: '/logo.png',
-            //@ts-ignore
+
             position: new kakao.maps.LatLng(35.14359797325633, 126.92482585917169),
             route: '/place/백두산',
           },
@@ -33,7 +29,7 @@ export default function useChineseMap(): JSX.Element {
           {
             name: '일품',
             imageSrc: '/logo.png',
-            //@ts-ignore
+
             position: new kakao.maps.LatLng(35.14556586537565, 126.92969641170197),
             route: '/place/일품',
           },
@@ -41,7 +37,7 @@ export default function useChineseMap(): JSX.Element {
           {
             name: '옌타이',
             imageSrc: '/logo.png',
-            //@ts-ignore
+
             position: new kakao.maps.LatLng(35.14524404050269, 126.93040998190367),
             route: '/place/옌타이',
           },
@@ -49,7 +45,7 @@ export default function useChineseMap(): JSX.Element {
           {
             name: '탕화쿵푸마라탕',
             imageSrc: '/logo.png',
-            //@ts-ignore
+
             position: new kakao.maps.LatLng(35.144405108979605, 126.92926120797044),
             route: '/place/탕화쿵푸마라탕',
           },
@@ -57,19 +53,16 @@ export default function useChineseMap(): JSX.Element {
           {
             name: '마라클럽',
             imageSrc: '/logo.png',
-            //@ts-ignore
+
             position: new kakao.maps.LatLng(35.14647573716354, 126.92883417725054),
             route: '/place/마라클럽',
           },
         ];
         locations.map((location, index) => {
-          //@ts-ignore
           const markerImage = new kakao.maps.MarkerImage(location.imageSrc, new kakao.maps.Size(30, 30), {
-            //@ts-ignore
             offset: new kakao.maps.Point(14, 0),
           });
 
-          //@ts-ignore
           const marker = new kakao.maps.Marker({
             position: location.position,
             image: markerImage,
@@ -85,7 +78,7 @@ export default function useChineseMap(): JSX.Element {
             '</div>';
 
           const position = location.position;
-          //@ts-ignore
+
           const customOverlay = new kakao.maps.CustomOverlay({
             map: map,
             position: position,
@@ -100,7 +93,6 @@ export default function useChineseMap(): JSX.Element {
             });
           }
           kakao.maps.event.addListener(marker, 'click', function () {
-            // HTML 콘텐츠를 생성하고 스타일을 적용합니다
             router.push(location.route);
           });
         });

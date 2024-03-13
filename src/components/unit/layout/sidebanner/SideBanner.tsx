@@ -9,14 +9,16 @@ export default function SideBanner(): JSX.Element {
   const gifImages = ['/sidegif2.gif', '/sidegif3.gif', '/sidegif1.gif'];
   useEffect(() => {
     const interval = setInterval(() => {
-      setFade(false); // 페이드 아웃 시작
+      setFade(false); //페이드 아웃 시작
       setTimeout(() => {
-        setCurrentGif((prevIndex) => (prevIndex + 1) % gifImages.length); // 다음 이미지로 전환
-        setFade(true); // 페이드 인 시작
-      }, 700); // 0.5초 후 이미지 변경
-    }, 3000); // 3초마다 이미지 전환
+        setCurrentGif((prevIndex) => (prevIndex + 1) % gifImages.length); //다음 이미지로 전환
+        setFade(true); //페이드 인 시작
+      }, 700); //0.5초 후 이미지 변경
+    }, 3000); //3초마다 이미지 전환
 
-    return () => clearInterval(interval); // 컴포넌트 unmount시 인터벌 정리
+    return () => {
+      clearInterval(interval);
+    }; //컴포넌트 unmount시 인터벌 정리
   }, []);
   return (
     <S.Wrapper>
@@ -29,7 +31,7 @@ export default function SideBanner(): JSX.Element {
       <S.Gif
         style={{
           backgroundImage: `url(${gifImages[currentGif]})`,
-          opacity: fade ? 1 : 0, // 상태에 따라 투명도 변경
+          opacity: fade ? 1 : 0, //상태에 따라 투명도 변경
         }}
       />
       <S.TagWrapper>

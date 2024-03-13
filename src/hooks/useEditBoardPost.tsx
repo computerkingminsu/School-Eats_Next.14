@@ -80,8 +80,8 @@ export const useEditBoardPost = (postId: string) => {
   };
 
   const onSubmit: any = async (data: { title: string; contents: string }) => {
-    if (isSubmitting) return; // 이미 업로드 중이면 추가 제출 방지
-    setIsSubmitting(true); // 업로드 상태로 변경
+    if (isSubmitting) return; //이미 업로드 중이면 추가 제출 방지
+    setIsSubmitting(true); //업로드 상태로 변경
     const imageUrl = await uploadImage();
     const boardDoc = doc(db, 'board', postId);
 
@@ -90,9 +90,9 @@ export const useEditBoardPost = (postId: string) => {
       contents: data.contents,
       timestamp: new Date(),
       email,
-      ...(imageUrl && { img: imageUrl }), // 새 이미지가 있으면 img 필드 업데이트
+      ...(imageUrl && { img: imageUrl }), //새 이미지가 있으면 img 필드 업데이트
     });
-    // 새 이미지 업로드 후 기존 이미지 삭제
+    //새 이미지 업로드 후 기존 이미지 삭제
 
     if (imageUrl && post?.img) {
       const oldImageRef = ref(storage, post.img);
@@ -100,7 +100,7 @@ export const useEditBoardPost = (postId: string) => {
     }
 
     success();
-    setIsSubmitting(false); // 업로드 상태 해제
+    setIsSubmitting(false); //업로드 상태 해제
     router.push('/boards');
   };
 

@@ -135,7 +135,9 @@ export default function FoodQuration(): JSX.Element {
           <S.DotButton
             key={index}
             className={index === selectedIndex ? 'is-selected' : ''}
-            onClick={() => scrollTo(index)}
+            onClick={() => {
+              scrollTo(index);
+            }}
           ></S.DotButton>
         ))}
       </S.DotsContainer>

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-
 import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import { Modal } from 'antd';
 import { isLoggedIn, userEmail } from '../globalstate/globalstate';
@@ -21,8 +20,7 @@ export const useCommentLike = (commentId: string) => {
   const [isCommentLiked, setIsCommentLiked] = useState(false);
 
   const getCommentLike = async () => {
-    let q;
-    q = query(collection(db, 'commentlike'), where('commentId', '==', commentId));
+    const q = query(collection(db, 'commentlike'), where('commentId', '==', commentId));
     const snapshot = await getDocs(q);
     const getCommentedLikes = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     setCommentLike(getCommentedLikes);
@@ -34,10 +32,10 @@ export const useCommentLike = (commentId: string) => {
       return;
     }
 
-    // '좋아요' 객체 생성 및 UI 업데이트
+    //'좋아요' 객체 생성 및 UI 업데이트
     const newLikeObj: Like = {
       email,
-      // 임시 ID 할당
+      //임시 ID 할당
       id: Date.now().toString(),
       commentId: commentId,
     };
@@ -45,38 +43,48 @@ export const useCommentLike = (commentId: string) => {
     setCommentLike([...commentLike, newLikeObj]);
     setIsCommentLiked(true);
 
-    // 데이터베이스에 '좋아요' 추가
+    //데이터베이스에 '좋아요' 추가
     try {
       const likeRef = collection(db, 'commentlike');
       await addDoc(likeRef, { email, commentId: commentId });
-      getCommentLike(); // 최신 '좋아요' 상태를 다시 불러옴
+      getCommentLike(); //최신 '좋아요' 상태를 다시 불러옴
     } catch (error) {
       console.error('Error adding like:', error);
-      setCommentLike(commentLike.filter((l) => l.id !== newLikeObj.id)); // 실패 시 UI에서 '좋아요' 제거
+      setCommentLike(
+        commentLike.filter((l) => {
+          l.id !== newLikeObj.id;
+        })
+      ); //실패 시 UI에서 '좋아요' 제거
       setIsCommentLiked(false);
     }
   };
   const deleteLike = async (likeId: string) => {
-    // UI에서 '좋아요' 제거
-    setCommentLike(commentLike.filter((l) => l.id !== likeId));
+    //UI에서 '좋아요' 제거
+    setCommentLike(
+      commentLike.filter((l) => {
+        l.id !== likeId;
+      })
+    );
     setIsCommentLiked(false);
 
-    // 데이터베이스에서 '좋아요' 삭제
+    //데이터베이스에서 '좋아요' 삭제
     try {
       const deletelike = doc(db, 'commentlike', likeId);
 
       await deleteDoc(deletelike);
-      getCommentLike(); // 최신 '좋아요' 상태를 다시 불러옴
+      getCommentLike(); //최신 '좋아요' 상태를 다시 불러옴
     } catch (error) {
       console.error('Error deleting like:', error);
-      // 실패 시 오류 메시지 표시
+      //실패 시 오류 메시지 표시
       Modal.error({
         title: '좋아요 삭제에 실패했습니다.',
       });
     }
   };
   const handleCommentLike = async () => {
-    const currentLike = commentLike.find((l) => l.email === email);
+    const currentLike = commentLike.find((l) => {
+      l.email === email;
+    });
     if (currentLike) {
       await deleteLike(currentLike.id);
     } else {
@@ -96,7 +104,9 @@ export const useCommentLike = (commentId: string) => {
   }, [commentId]);
 
   useEffect(() => {
-    const isUserLiked = commentLike.some((l) => l.email === email);
+    const isUserLiked = commentLike.some((l) => {
+      l.email === email;
+    });
     setIsCommentLiked(isUserLiked);
 
     // 백그라운드에서 데이터베이스 업데이트

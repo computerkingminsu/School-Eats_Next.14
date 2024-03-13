@@ -35,7 +35,7 @@ export const useComments = () => {
   // const postId = jsonObject.placeid;
   const params = useParams();
   const placeId = params.placeid;
-  //@ts-ignore
+  //@ts-expect-error
   const postId = decodeURIComponent(placeId);
   const [comments, setComments] = useState<Comment[]>([]);
   const [login] = useRecoilState(isLoggedIn);
@@ -74,7 +74,7 @@ export const useComments = () => {
     });
   };
 
-  // 사용자에게 먼저 ui 보여주고 백그라운드에서 add 진행
+  //사용자에게 먼저 ui 보여주고 백그라운드에서 add 진행
   const addComment = async () => {
     if (!login) {
       addDocError();
@@ -97,22 +97,21 @@ export const useComments = () => {
 
     const tempId = Date.now();
 
-    // 댓글 객체 생성
+    //댓글 객체 생성
     const newCommentObj: Comment = {
       id: tempId,
       text: newComment,
       email,
       rating: newRating,
       timestamp: new Date(),
-      //@ts-ignore
       placeId: postId,
     };
 
-    // 댓글 UI 즉시 업데이트
+    //댓글 UI 즉시 업데이트
 
     setComments([newCommentObj, ...comments]);
 
-    // 데이터베이스에 댓글 저장
+    //데이터베이스에 댓글 저장
     try {
       const commentsRef = collection(db, 'comment');
 
@@ -121,36 +120,33 @@ export const useComments = () => {
       setNewComment('');
       setNewRating(0);
       setComments((prevComments) =>
-        prevComments.map((comment) =>
-          //@ts-ignore
-          comment.id === tempId ? { ...comment, id: docRef.id } : comment
-        )
+        prevComments.map((comment) => (comment.id === tempId ? { ...comment, id: docRef.id } : comment))
       );
     } catch (error) {
       console.error('Error adding comment:', error);
-      // 실패 시 UI에서 댓글 제거
-      //@ts-ignore
+      //실패 시 UI에서 댓글 제거
+
       setComments(comments.filter((comment) => comment !== newCommentObj));
     }
   };
 
   const deleteComment = async (commentId: any) => {
-    // 먼저 UI에서 댓글을 제거
+    //먼저 UI에서 댓글을 제거
 
     setComments((prevComments) => prevComments.filter((comment) => comment.id !== commentId));
     try {
-      // 데이터베이스에서 댓글 삭제
+      //데이터베이스에서 댓글 삭제
       const commentDoc = doc(db, 'comment', commentId);
 
       await deleteDoc(commentDoc);
       deletemodal();
     } catch (error) {
       console.error('Error deleting comment:', error);
-      // 실패 시 오류 메시지 표시
+      //실패 시 오류 메시지 표시
       Modal.error({
         title: '리뷰 삭제에 실패했습니다.',
       });
-      // 실패 시 UI를 원래 상태로 복구
+      //실패 시 UI를 원래 상태로 복구
       getComments();
     }
   };

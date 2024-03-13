@@ -46,11 +46,11 @@ export const useBoardComments = () => {
   const email = useRecoilValue(userEmail);
 
   const formatDate = (date: Date) => {
-    const year = date.getFullYear().toString().slice(-2); // 뒤의 두 자리 숫자만 추출
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 월 (0부터 시작하므로 1을 더함)
-    const day = date.getDate().toString().padStart(2, '0'); // 일
-    const hours = date.getHours().toString().padStart(2, '0'); // 시간
-    const minutes = date.getMinutes().toString().padStart(2, '0'); // 분
+    const year = date.getFullYear().toString().slice(-2); //뒤의 두 자리 숫자만 추출
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); //월 (0부터 시작하므로 1을 더함)
+    const day = date.getDate().toString().padStart(2, '0'); //일
+    const hours = date.getHours().toString().padStart(2, '0'); //시간
+    const minutes = date.getMinutes().toString().padStart(2, '0'); //분
 
     return `${year}/${month}/${day} ${hours}:${minutes}`;
   };
@@ -61,13 +61,13 @@ export const useBoardComments = () => {
     const snapshot = await getDocs(q);
     const commentsArr: Comment[] = snapshot.docs.map((doc: QueryDocumentSnapshot<DocumentData>) => {
       const data = doc.data();
-      // Firestore 타임스탬프를 Date 객체로 변환
+      //Firestore 타임스탬프를 Date 객체로 변환
       const date = data.timestamp ? formatDate(data.timestamp.toDate()) : '';
 
       return {
         ...data,
         id: doc.id,
-        timestamp: date, // 포맷된 날짜 사용
+        timestamp: date, //포맷된 날짜 사용
       };
     });
 
@@ -91,7 +91,7 @@ export const useBoardComments = () => {
     });
   };
 
-  // 사용자에게 먼저 ui 보여주고 백그라운드에서 add 진행
+  //사용자에게 먼저 ui 보여주고 백그라운드에서 add 진행
   const addComment = async () => {
     if (!login) {
       addDocError();
@@ -114,7 +114,7 @@ export const useBoardComments = () => {
 
     const tempId = Date.now();
 
-    // 댓글 객체 생성
+    //댓글 객체 생성
     const newCommentObj: NewComment = {
       id: tempId,
       text: newComment,
@@ -122,10 +122,10 @@ export const useBoardComments = () => {
       timestamp: formatDate(new Date()),
     };
 
-    // 댓글 UI 즉시 업데이트
+    //댓글 UI 즉시 업데이트
     setComments([newCommentObj, ...comments]);
 
-    // 데이터베이스에 댓글 저장
+    //데이터베이스에 댓글 저장
     try {
       // const commentsRef = collection(db, 'board', postId, 'comment');
       const commentsRef = collection(db, 'boardcomment');
@@ -143,29 +143,29 @@ export const useBoardComments = () => {
       );
     } catch (error) {
       console.error('Error adding comment:', error);
-      // 실패 시 UI에서 댓글 제거
+      //실패 시 UI에서 댓글 제거
 
       setComments(comments.filter((comment) => comment !== newCommentObj));
     }
   };
 
   const deleteComment = async (commentId: any) => {
-    // 먼저 UI에서 댓글을 제거
+    //먼저 UI에서 댓글을 제거
 
     setComments((prevComments) => prevComments.filter((comment) => comment.id !== commentId));
     try {
-      // 데이터베이스에서 댓글 삭제
+      //데이터베이스에서 댓글 삭제
 
       const commentDoc = doc(db, 'boardcomment', commentId);
       await deleteDoc(commentDoc);
       deletemodal();
     } catch (error) {
       console.error('Error deleting comment:', error);
-      // 실패 시 오류 메시지 표시
+      //실패 시 오류 메시지 표시
       Modal.error({
         title: '댓글 삭제에 실패했습니다.',
       });
-      // 실패 시 UI를 원래 상태로 복구
+      //실패 시 UI를 원래 상태로 복구
       getComments();
     }
   };
@@ -184,7 +184,7 @@ export const useBoardComments = () => {
         text: newText,
       });
 
-      // UI 업데이트
+      //UI 업데이트
       setComments(
         comments.map((comment) => {
           if (comment.id === commentId) {
@@ -208,7 +208,7 @@ export const useBoardComments = () => {
   useEffect(() => {
     if (comments.length > 0) {
       const commentCount = comments.length;
-      // 백그라운드에서 데이터베이스 업데이트
+      //백그라운드에서 데이터베이스 업데이트
       updateCount(commentCount);
     } else {
       const commentCount = 0;

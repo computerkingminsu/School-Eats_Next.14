@@ -14,11 +14,11 @@ export default function Search() {
     router.back();
   };
 
-  const [searchTerm, setSearchTerm] = useState(''); // 사용자 입력을 추적하는 상태
-  const searchResults = usePlaceSearch('all', searchTerm); // 훅 사용
+  const [searchTerm, setSearchTerm] = useState(''); //사용자 입력을 추적하는 상태
+  const searchResults = usePlaceSearch('all', searchTerm); //훅 사용
 
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value); // 입력 변경 시 searchTerm 업데이트
+    setSearchTerm(e.target.value); //입력 변경 시 searchTerm 업데이트
   };
 
   return (
@@ -48,7 +48,7 @@ export default function Search() {
                     '/rate.png' ||
                     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=='
                   }
-                  //@ts-ignore
+                  //@ts-expect-error
                   alt={place.title}
                   width={11}
                   height={11}

@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import * as S from '../Place.styles';
-import { Select, Spin } from 'antd';
+import { Select } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useGetCategoryPosts } from '../../../../hooks/useGetCategoryPosts';
@@ -31,7 +31,7 @@ export default function ChinesePlace(): JSX.Element {
 
   const handleChange = (value: OrdKey) => {
     setOrder(value);
-    // 선택한 정렬 기준을 URL 쿼리 파라미터로 추가합니다.
+    //선택한 정렬 기준을 URL 쿼리 파라미터로 추가합니다.
     router.push(`${pathname}?sort=${value}`);
   };
 
@@ -78,7 +78,7 @@ export default function ChinesePlace(): JSX.Element {
       </S.SelectDiv>
       <S.ContentsWrapper>
         {loading && posts.length === 0 ? (
-          // 로딩 중일 때 스켈레톤 표시
+          //로딩 중일 때 스켈레톤 표시
           <SkeletonPlace />
         ) : (
           posts.map((post: Post) => (
@@ -90,7 +90,7 @@ export default function ChinesePlace(): JSX.Element {
                       post.img ||
                       'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=='
                     }
-                    //@ts-ignore
+                    //@ts-expect-error
                     alt={post.title}
                     // width={230}
                     // height={240}
@@ -107,7 +107,7 @@ export default function ChinesePlace(): JSX.Element {
                         '/rate.png' ||
                         'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=='
                       }
-                      //@ts-ignore
+                      //@ts-expect-error
                       alt={post.title}
                       width={11}
                       height={11}
