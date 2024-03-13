@@ -11,6 +11,7 @@ declare global {
   interface Window {
     Kakao: any;
   }
+  const kakao: any;
 }
 
 export const firebaseConfig = {

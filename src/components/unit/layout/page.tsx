@@ -51,28 +51,27 @@ const RightWrapper = styled.div`
 `;
 
 export default function Layout(props: ILayoutProps): JSX.Element {
-  // useAuth();
   const pathname = usePathname();
 
-  const isLoginPage = pathname === '/login';
-  const isSignupPage = pathname === '/signup';
-  const isMyPage = pathname === '/mypage' || pathname.startsWith('/mypage/');
-  const isNoticePage = pathname === '/notice';
-  const isGuidePage = pathname === '/guide';
-  const isSearchPage = pathname === '/search';
-  const isFeedbackPage = pathname === '/feedback';
-  const isRequestPage = pathname === '/request';
-  const isResetPasswordPage = pathname === '/resetpassword';
+  const isLoginPage = pathname === '/login/';
+  const isSignupPage = pathname === '/signup/';
+  const isMyPage = pathname === '/mypage/' || pathname.startsWith('/mypage/');
+  const isNoticePage = pathname === '/notice/';
+  const isGuidePage = pathname === '/guide/';
+  const isSearchPage = pathname === '/search/';
+  const isFeedbackPage = pathname === '/feedback/';
+  const isRequestPage = pathname === '/request/';
+  const isResetPasswordPage = pathname === '/resetpassword/';
   const isPlaceDetailPage =
-    pathname !== '/place/koreanplace' &&
-    pathname !== '/place/chineseplace' &&
-    pathname !== '/place/japaneseplace' &&
-    pathname !== '/place/cafeplace' &&
-    pathname !== '/place/westernplace' &&
+    // pathname !== '/place/koreanplace/' &&
+    // pathname !== '/place/chineseplace/' &&
+    // pathname !== '/place/japaneseplace/' &&
+    // pathname !== '/place/cafeplace/' &&
+    // pathname !== '/place/westernplace/' &&
     pathname.startsWith('/place/');
   const isBoardsDetailPage = pathname.startsWith('/boards/');
-  const showLayout = !isLoginPage && !isSignupPage;
 
+  const showLayout = !isLoginPage && !isSignupPage;
   return (
     <Wrapper>
       <LeftWrapper>
@@ -86,7 +85,7 @@ export default function Layout(props: ILayoutProps): JSX.Element {
           !isGuidePage &&
           !isSearchPage &&
           !isFeedbackPage &&
-          !isPlaceDetailPage &&
+          isPlaceDetailPage &&
           !isResetPasswordPage &&
           !isRequestPage && <LayoutHeader />}
 

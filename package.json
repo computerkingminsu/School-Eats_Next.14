@@ -12,6 +12,7 @@
     "@ant-design/cssinjs": "^1.18.4",
     "@ant-design/icons": "^5.3.1",
     "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.3.4",
     "@svgr/webpack": "^8.1.0",
     "antd": "^5.15.2",

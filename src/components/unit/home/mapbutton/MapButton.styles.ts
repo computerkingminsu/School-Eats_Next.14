@@ -49,6 +49,9 @@ export const Button = styled.div`
   border-radius: 50%;
   border: 1px solid #d9d9d9;
   cursor: pointer;
+  &:hover {
+    filter: brightness(85%);
+  }
 `;
 
 export const ImageWrapper = styled.div`
