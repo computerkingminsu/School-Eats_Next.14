@@ -21,8 +21,6 @@ interface Post {
 
 type OrdKey = 'rate' | 'commentscount';
 
-export const dynamic = 'force-dynamic';
-
 export default function Place(): JSX.Element {
   const router = useRouter();
   const pathname = usePathname();

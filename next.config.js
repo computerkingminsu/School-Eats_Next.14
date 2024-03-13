@@ -12,6 +12,7 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     emotion: true,
+    missingSuspenseWithCSRBailout: false,
   },
   eslint: {
     // 빌드 시 ESLint 실행을 무시
