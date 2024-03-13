@@ -1,6 +1,8 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { collection, getDocs, DocumentData } from 'firebase/firestore';
-import { db } from '../../pages/_app'; // DB 설정을 가져옴
+import { db } from '@/lib/Script';
 
 interface SearchResult extends DocumentData {
   id: string;

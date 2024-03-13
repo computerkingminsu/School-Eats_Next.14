@@ -1,12 +1,14 @@
+'use client';
+
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { Modal } from 'antd';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { autoLogin, isLoggedIn, layoutEmail, userEmail } from '../commons/globalstate/globalstate';
-import { authInstance } from '../../pages/_app';
+import { autoLogin, isLoggedIn, layoutEmail, userEmail } from '../globalstate/globalstate';
+import { authInstance } from '@/lib/Script';
 
 // 유효성 검사 스키마
 const schema = yup

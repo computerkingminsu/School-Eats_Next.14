@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+'use client';
 
-import { useRouter } from 'next/router';
-import { db } from '../../pages/_app';
+import { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+
 import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import { Modal } from 'antd';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { isLoggedIn, userEmail } from '../commons/globalstate/globalstate';
+import { isLoggedIn, userEmail } from '../globalstate/globalstate';
+import { db } from '@/lib/Script';
 interface Like {
   id: string;
   text?: string;
@@ -16,9 +18,16 @@ interface Like {
 export const useLike = () => {
   const email = useRecoilValue(userEmail);
   const router = useRouter();
-  const data = JSON.stringify(router.query); // boardId를 추출
-  const jsonObject = JSON.parse(data);
-  const postId = jsonObject.boardid;
+
+  // const data = JSON.stringify(router.query); // boardId를 추출
+  // const jsonObject = JSON.parse(data);
+  // const postId = jsonObject.boardid;
+
+  const params = useParams();
+  const boadId = params.boadid;
+  //@ts-ignore
+  const postId = decodeURIComponent(boadId);
+
   const [like, setLike] = useState<Like[]>([]);
   const [isLiked, setIsLiked] = useState(false);
   const [login] = useRecoilState(isLoggedIn);

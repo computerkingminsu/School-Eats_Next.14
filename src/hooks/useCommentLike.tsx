@@ -1,9 +1,12 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { db } from '../../pages/_app';
+
 import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import { Modal } from 'antd';
-import { isLoggedIn, userEmail } from '../commons/globalstate/globalstate';
+import { isLoggedIn, userEmail } from '../globalstate/globalstate';
+import { db } from '@/lib/Script';
 
 interface Like {
   id: string;

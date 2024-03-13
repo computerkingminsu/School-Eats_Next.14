@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import {
   DocumentData,
@@ -10,7 +12,7 @@ import {
   startAfter,
 } from 'firebase/firestore';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
-import { db } from '../../pages/_app';
+import { db } from '@/lib/Script';
 
 interface Post extends DocumentData {
   id: string;

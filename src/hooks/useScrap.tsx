@@ -1,10 +1,14 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { db } from '../../pages/_app';
+
 import { addDoc, collection, deleteDoc, doc, getDocs, query, where } from 'firebase/firestore';
 import { Modal } from 'antd';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { isLoggedIn, userEmail } from '../commons/globalstate/globalstate';
+import { isLoggedIn, userEmail } from '../globalstate/globalstate';
+import { db } from '@/lib/Script';
+import { useParams } from 'next/navigation';
 interface Scrap {
   id: string;
   text?: string;
@@ -15,9 +19,16 @@ export const useScrap = () => {
   const [login] = useRecoilState(isLoggedIn);
   const email = useRecoilValue(userEmail);
   const router = useRouter();
-  const data = JSON.stringify(router.query); // boardId를 추출
-  const jsonObject = JSON.parse(data);
-  const postId = jsonObject.boardid;
+
+  // const data = JSON.stringify(router.query); // boardId를 추출
+  // const jsonObject = JSON.parse(data);
+  // const postId = jsonObject.boardid;
+
+  const params = useParams();
+  const boadId = params.boadid;
+  //@ts-ignore
+  const postId = decodeURIComponent(boadId);
+
   const [scrap, setScrap] = useState<Scrap[]>([]);
 
   const getScrap = async () => {

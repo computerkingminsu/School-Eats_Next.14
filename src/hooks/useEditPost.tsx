@@ -1,16 +1,22 @@
-import { ChangeEvent, useState } from 'react';
+'use client';
 
-import { useRouter } from 'next/router';
-import { db } from '../../pages/_app';
+import { ChangeEvent, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '@/lib/Script';
 
 export const useEditPost = () => {
   const [title, setTitle] = useState('');
   const [contents, setContents] = useState('');
   const router = useRouter();
-  const data = JSON.stringify(router.query); // boardId를 추출
-  const jsonObject = JSON.parse(data);
-  const postId = jsonObject.boadid;
+  // const data = JSON.stringify(router.query); // boardId를 추출
+  // const jsonObject = JSON.parse(data);
+  // const postId = jsonObject.boadid;
+  const params = useParams();
+  const boadId = params.boadid;
+  //@ts-ignore
+  const postId = decodeURIComponent(boadId);
+
   const onChangeContents = (value: string) => {
     setContents(value);
   };

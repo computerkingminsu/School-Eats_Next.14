@@ -1,12 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useRouter } from 'next/router';
-import { db } from '../../pages/_app';
+import { useRouter } from 'next/navigation';
 import { addDoc, collection } from 'firebase/firestore';
 import { Modal } from 'antd';
 import { useRecoilValue } from 'recoil';
-import { userEmail } from '../commons/globalstate/globalstate';
+import { userEmail } from '../globalstate/globalstate';
+import { db } from '@/lib/Script';
 
 const postSchema = yup
   .object({

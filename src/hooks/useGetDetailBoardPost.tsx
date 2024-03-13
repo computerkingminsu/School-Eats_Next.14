@@ -1,6 +1,7 @@
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../pages/_app';
+'use client';
 
+import { db } from '@/lib/Script';
+import { doc, getDoc } from 'firebase/firestore';
 import { useQuery } from 'react-query';
 
 interface Post {
