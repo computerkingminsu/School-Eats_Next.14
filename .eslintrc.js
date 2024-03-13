@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['standard-with-typescript', 'plugin:react/recommended', 'prettier'],
+  extends: ['standard-with-typescript', 'plugin:react/recommended', 'prettier', 'next'],
   overrides: [
     {
       env: {
@@ -28,5 +28,7 @@ module.exports = {
     '@typescript-eslint/strict-boolean-expressions': 'off',
     '@typescript-eslint/no-misused-promises': 'off',
     '@typescript-eslint/triple-slash-reference': 'off',
+    'react/no-unescaped-entities': 'off',
+    '@next/next/no-page-custom-font': 'off',
   },
 };

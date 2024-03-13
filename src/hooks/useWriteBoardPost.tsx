@@ -69,8 +69,8 @@ export const useWriteBoardPost = () => {
   };
 
   const onSubmit = async (data: { title: string; contents: string }) => {
-    if (isSubmitting) return; // 이미 제출 중이면 추가 제출 방지
-    setIsSubmitting(true); // 제출 상태로 변경
+    if (isSubmitting) return; //이미 제출 중이면 추가 제출 방지
+    setIsSubmitting(true); //제출 상태로 변경
     const imageUrl = await uploadImage();
     const board = collection(db, 'board');
     await addDoc(board, {
@@ -83,7 +83,7 @@ export const useWriteBoardPost = () => {
       likecount: 0,
     });
     success();
-    setIsSubmitting(false); // 제출 상태 해제
+    setIsSubmitting(false); //제출 상태 해제
     router.push('/boards');
   };
 
