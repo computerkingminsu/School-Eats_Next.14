@@ -1,3 +1,5 @@
+'use client';
+
 import {
   DocumentData,
   QueryDocumentSnapshot,
@@ -219,7 +221,7 @@ export const useBoardComments = () => {
       getComments();
     }
   }, [postId]);
-
+  //
   return {
     comments,
     newComment,
