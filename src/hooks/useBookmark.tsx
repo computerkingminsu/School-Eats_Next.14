@@ -27,7 +27,6 @@ interface Bookmark {
 export const useBookmark = () => {
   const [login] = useRecoilState(isLoggedIn);
   const email = useRecoilValue(userEmail);
-  const router = useRouter();
 
   // const data = JSON.stringify(router.query); // boardId를 추출
   // const jsonObject = JSON.parse(data);

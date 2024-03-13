@@ -1,6 +1,8 @@
+'use client';
+
 import { useQuery } from 'react-query';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import { db } from '../../pages/_app';
+import { db } from '@/lib/Script';
 
 interface Post {
   id: string;
@@ -14,7 +16,7 @@ type OrdKey = 'rate' | 'commentscount';
 const fetchPosts = async (menu: string, category: string, ord: OrdKey): Promise<Post[]> => {
   const q = query(collection(db, menu), where('category', '==', category));
   const snapshot = await getDocs(q);
-  const postsArray = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id } as Post));
+  const postsArray = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }) as Post);
 
   // 정렬
   postsArray.sort((a, b) => (b[ord] || 0) - (a[ord] || 0));

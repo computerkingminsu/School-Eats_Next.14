@@ -1,14 +1,14 @@
 'use client';
 
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import * as S from '../Place.styles';
-import { useGetPosts } from '../../../../hooks/useGetPosts';
 import { Select, Spin } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useGetCategoryPosts } from '../../../../hooks/useGetCategoryPosts';
 import { useEffect, useState } from 'react';
 import SkeletonPlace from '../Skeleton';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 interface Post {
   title?: string;
@@ -22,18 +22,24 @@ interface Post {
 type OrdKey = 'rate' | 'commentscount';
 export default function KoreanPlace(): JSX.Element {
   const router = useRouter();
-  const [order, setOrder] = useState<OrdKey>((router.query.sort as OrdKey) || 'commentscount');
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [order, setOrder] = useState<OrdKey>((searchParams.get('sort') as OrdKey) || 'commentscount');
+
   const { posts, loading } = useGetCategoryPosts('all', '한식', order);
+
   const handleChange = (value: OrdKey) => {
     setOrder(value);
     // 선택한 정렬 기준을 URL 쿼리 파라미터로 추가합니다.
-    router.push(`${router.pathname}?sort=${value}`, undefined, { shallow: true });
+    router.push(`${pathname}?sort=${value}`);
   };
+
   useEffect(() => {
-    if (router.query.sort) {
-      setOrder(router.query.sort as OrdKey);
+    const sortParam = searchParams.get('sort');
+    if (sortParam) {
+      setOrder(sortParam as OrdKey);
     }
-  }, [router.query.sort]);
+  }, [searchParams]);
 
   return (
     <S.Wrapper>
