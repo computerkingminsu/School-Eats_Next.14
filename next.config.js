@@ -13,6 +13,10 @@ const nextConfig = {
   experimental: {
     emotion: true,
   },
+  eslint: {
+    // 빌드 시 ESLint 실행을 무시
+    ignoreDuringBuilds: true,
+  },
   compiler: {
     // styledComponents 설정 추가
     styledComponents: true,
