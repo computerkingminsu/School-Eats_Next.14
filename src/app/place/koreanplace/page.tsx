@@ -9,7 +9,7 @@ import KoreanPlace from '@/components/unit/place/KoreanPlace/koreanPlace.index';
 //   suspense: true,
 // });
 
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
 
 export default function koreanplace() {
   return <KoreanPlace />;
