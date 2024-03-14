@@ -116,7 +116,7 @@ For building and running the application you need:
 ### Installation
 
 ```bash
-$ git clone https://github.com/computerkingminsu/School-Eats.git
+$ git clone https://github.com/computerkingminsu/School-Eats_Next.14.git
 $ yarn install
 $ yarn dev
 ```
