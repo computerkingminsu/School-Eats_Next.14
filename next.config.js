@@ -7,7 +7,7 @@ const withPWA = require('next-pwa')({
 });
 
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   trailingSlash: true,
   swcMinify: true,
   experimental: {

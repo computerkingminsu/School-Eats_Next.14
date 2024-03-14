@@ -61,7 +61,6 @@ export default function Layout(props: ILayoutProps): JSX.Element {
   const isSearchPage = pathname === '/search/';
   const isFeedbackPage = pathname === '/feedback/';
   const isRequestPage = pathname === '/request/';
-
   const isResetPasswordPage = pathname === '/resetpassword/';
   const isPlaceDetailPage =
     // pathname !== '/place/koreanplace/' &&
@@ -70,7 +69,7 @@ export default function Layout(props: ILayoutProps): JSX.Element {
     // pathname !== '/place/cafeplace/' &&
     // pathname !== '/place/westernplace/';
     pathname.startsWith('/place/%');
-  const isBoardsDetailPage = pathname.startsWith('/boards/');
+  const isBoardsDetailPage = /^\/boards\/.+/.test(pathname);
 
   const showLayout = !isLoginPage && !isSignupPage;
   return (

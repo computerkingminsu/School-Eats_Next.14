@@ -13,9 +13,8 @@ import {
   updateDoc,
   where,
 } from 'firebase/firestore';
-import { useRouter } from 'next/router';
+import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { isLoggedIn, userEmail } from '../globalstate/globalstate';
 import { Modal } from 'antd';
@@ -36,9 +35,13 @@ interface NewComment extends Omit<Comment, 'likecount' | 'id'> {
 }
 export const useBoardComments = () => {
   const router = useRouter();
-  const data = JSON.stringify(router.query); // boardId를 추출
-  const jsonObject = JSON.parse(data);
-  const postId = jsonObject.boardid;
+  // const data = JSON.stringify(router.query); // boardId를 추출
+  // const jsonObject = JSON.parse(data);
+  // const postId = jsonObject.boardid;
+  const params = useParams();
+  const boardId = params.boardid;
+  //@ts-expect-error
+  const postId = decodeURIComponent(boardId);
   const [comments, setComments] = useState<Comment[]>([]);
   const [login] = useRecoilState(isLoggedIn);
   const [newComment, setNewComment] = useState<string>('');

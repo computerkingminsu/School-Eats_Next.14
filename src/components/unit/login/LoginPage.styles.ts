@@ -99,12 +99,21 @@ export const IdInput = styled.input`
   }
 `;
 
+export const TextWrapper = styled.div`
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 55px;
+`;
 export const SignUpText = styled.span`
   font-size: 14px;
   color: #6e6e6e;
   font-weight: 400;
   height: auto;
-  
+  /* margin-top: 5%; */
+  /* padding-top: 5%; */
   /* background-color: red; */
   text-align: center;
   text-decoration: underline;
@@ -116,7 +125,7 @@ export const FindPassword = styled.span`
   color: #6e6e6e;
   font-weight: 400;
   height: auto;
-  margin-top: 5%;
+  /* margin-top: 5%; */
   text-align: center;
   text-decoration: underline;
   cursor: pointer;
@@ -156,8 +165,6 @@ export const LoginButton = styled.button`
   align-items: center;
   cursor: pointer;
 `;
-
-
 
 export const CouponDiv = styled.div`
   width: 106.3%;

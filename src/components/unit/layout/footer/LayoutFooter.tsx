@@ -5,15 +5,15 @@ export default function LayoutFooter(): JSX.Element {
   return (
     <>
       <S.Wrapper>
-        <Link href="notice" style={{ textDecoration: 'none' }}>
+        <Link href="/notice" style={{ textDecoration: 'none' }}>
           <S.Request>공지사항</S.Request>
         </Link>
         &nbsp;&nbsp;&nbsp;|&nbsp; &nbsp;&nbsp;
-        <Link href="guide" style={{ textDecoration: 'none' }}>
+        <Link href="/guide" style={{ textDecoration: 'none' }}>
           <S.Request>이용안내</S.Request>
         </Link>
         &nbsp;&nbsp;&nbsp;|&nbsp; &nbsp;&nbsp;
-        <Link href="feedback" style={{ textDecoration: 'none' }}>
+        <Link href="/feedback" style={{ textDecoration: 'none' }}>
           <S.Request>문의</S.Request>
         </Link>
         <S.Header>(주)School Eats</S.Header>
