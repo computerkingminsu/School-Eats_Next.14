@@ -4,7 +4,7 @@
 
 ## 배포 주소
 
-> **개발 버전** : [https://schooleats.vercel.app/](https://schooleats.vercel.app/)
+> [https://schooleats.vercel.app/](https://schooleats.vercel.app/)
 
 ## 프로젝트 소개
 
@@ -116,7 +116,7 @@ For building and running the application you need:
 ### Installation
 
 ```bash
-$ git clone https://github.com/computerkingminsu/School-Eats.git
+$ git clone https://github.com/computerkingminsu/School-Eats_Next.14.git
 $ yarn install
 $ yarn dev
 ```
