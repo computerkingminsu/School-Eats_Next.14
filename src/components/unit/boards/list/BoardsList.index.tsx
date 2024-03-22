@@ -22,7 +22,7 @@ interface Post {
 }
 
 export default function BoardsList() {
-  const { posts, hasMore, loading } = useGetBoardPosts();
+  const { posts, hasNextPage, isFetchingNextPage } = useGetBoardPosts();
   const [searchTerm, setSearchTerm] = useState('');
   const searchResults = useBoardSearch('board', searchTerm);
 
@@ -116,7 +116,7 @@ export default function BoardsList() {
               </S.ContentsWrapper>
             </Link>
           ))}
-      <S.SpinDiv>{hasMore && loading && <Spin size="large" />}</S.SpinDiv>
+      <S.SpinDiv>{hasNextPage && isFetchingNextPage && <Spin size="large" />}</S.SpinDiv>
     </S.Wrapper>
   );
 }
